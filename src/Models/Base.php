@@ -1,60 +1,17 @@
 <?php
 
-use Guzzle\Http\Client;
-
-class IblClient_Models_Base 
+class IblClient_Models_Base extends IblClient_Models_Client
 {
-    public $version;
-    public $schema;
-    public $timestamp;  
 
-    public $prefix = "IblClient_Models_";
-
-    public static $_baseUrl = "http://open.live.bbc.co.uk/";
-    public static $_version = "ibl/v1/";
-    public static $_client;
-
-    public $defaultParams = array("api_key" => "",
-                          "availability" => "all",
-                          "lang" => "en",
-                          "rights" => "web"
-                      );
-
-    public function buildMeta($object) {
-        $this->version = $object->version;
-        $this->schema = $object->schema;
-        $this->timestamp = $object->timestamp;
+    public $id;
+    public $title;
+    
+    public function getId() {
+      return $this->id;
     }
 
-    public function buildElements($elements) {
-      $array = array();
-      foreach ($elements as $element) {
-        $className = get_class($this);
-        $object = new $className;
-        $object->buildModel($element);
-        $array[] = $object;
-      }
-      return $array;
-    }
-
-    protected function _get($feed, $params) {
-        $params = array_merge($this->defaultParams, $params);
-        $client = self::getClient();
-        $request = $client->get(self::$_version . $feed, array(), array('query' => $params));
-    //var_dump($request->getUrl());die;
-        $response = $request->send();
-        $response->getBody();
-        $array = $response->json();
-        $json = json_encode($array);
-        $object = json_decode($json);
-        return $object;
-    }
-    public static function getClient() {
-      if (!self::$_client) {    
-          $client = new Client(self::$_baseUrl);
-          self::$_client = $client;
-      }
-      return self::$_client;
+    public function getType() {
+      return $this->type;
     }
 
 }

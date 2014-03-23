@@ -3,19 +3,10 @@
 class IblClient_Models_Elements extends IblClient_Models_Base
 {
 
-    public $id;
     public $type;
     public $synopses;
     public $master_brand;
     public $images;
-
-    public function getId() {
-      return $this->id;
-    }
-
-    public function getType() {
-      return $this->type;
-    }
 
     /**
      * Get the short synopsis (if available)
