@@ -17,23 +17,6 @@ class IblClient_Models_Client
                           "rights" => "web"
                       );
 
-    public function buildMeta($object) {
-        $this->version = $object->version;
-        $this->schema = $object->schema;
-        $this->timestamp = $object->timestamp;
-    }
-
-    public function buildElements($elements) {
-      $array = array();
-      foreach ($elements as $element) {
-        $className = get_class($this);
-        $object = new $className;
-        $object->buildModel($element);
-        $array[] = $object;
-      }
-      return $array;
-    }
-
     protected function _get($feed, $params) {
         $params = array_merge($this->defaultParams, $params);
         $client = self::getClient();
