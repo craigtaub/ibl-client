@@ -1,6 +1,6 @@
 <?php
 
-class IblClient_Models_Category extends IblClient_Models_Base implements IblClient_Models_Interface 
+class IblClient_Models_Category extends IblClient_Models_Elements implements IblClient_Models_Interface 
 {
     public $feed = "/categories";
 
