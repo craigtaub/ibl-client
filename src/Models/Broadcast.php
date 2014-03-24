@@ -1,6 +1,6 @@
 <?php
 
-class IblClient_Models_Broadcast extends IblClient_Models_Elements implements IblClient_Models_Interface 
+class IblClient_Models_Broadcast extends IblClient_Models_Elements
 {
     public $type = "";
     public $start_time = "";
@@ -8,16 +8,11 @@ class IblClient_Models_Broadcast extends IblClient_Models_Elements implements Ib
     public $duration = array();
     public $episode = "";
 
-
-  public function get($params) {
-  }
-
-  public function buildModel($object) {
+    public function buildModel($object) {
       foreach (get_object_vars($object) as $key => $value) {
           $this->$key = $value;
       }
-  }
-
+    }
 
     /**
      * Get type 
