@@ -10,8 +10,9 @@ class IblClient_Models_Base extends IblClient_Models_Client
       return $this->id;
     }
 
-    public function getType() {
-      return $this->type;
+    public function getTitle() {
+      return $this->title;
     }
+
 
 }

@@ -8,6 +8,11 @@ class IblClient_Models_Elements extends IblClient_Models_Base
     public $master_brand;
     public $images;
 
+
+    public function getType() {
+      return $this->type;
+    }
+    
     /**
      * Get the short synopsis (if available)
      *
@@ -54,6 +59,20 @@ class IblClient_Models_Elements extends IblClient_Models_Base
     }
 
     /**
+     * Get the master brand id
+     *
+     * @return string
+     */
+    public function getMasterBrandId() {
+        // @codingStandardsIgnoreStart
+        if (isset($this->master_brand->id)) {
+            return $this->master_brand->id;
+        }
+        // @codingStandardsIgnoreEnd
+        return "";
+    }
+
+    /**
      * Returns the recipe for a specific width x height or a recipe name
      *
      * @param string|int $width  Desired width of image
@@ -65,4 +84,22 @@ class IblClient_Models_Elements extends IblClient_Models_Base
     private function _getRecipe($width, $height) {
         return is_numeric($width) ? "{$width}x{$height}":$width;
     }
+
+    /**
+     * Get the $type image url for an element
+     *
+     * @param string $type Type of image to get (standard|vertical|portrait)
+     * @param string|int $width  Desired width of image (default 336).
+     *                           if not an integer indicates a recipe name
+     * @param int $height Desired height of image (default 581)
+     *
+     * @return string
+     */
+    public function getImage($type = 'standard', $width = 336, $height = 581) {
+        if (isset($this->images->{$type})) {
+            return str_replace('{recipe}', $this->_getRecipe($width, $height), $this->images->{$type});
+        }
+        return "";
+    }
+
 }

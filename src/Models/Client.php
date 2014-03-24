@@ -7,7 +7,7 @@ class IblClient_Models_Client
 
     public $prefix = "IblClient_Models_";
 
-    public static $_baseUrl = "http://open.live.bbc.co.uk/";
+    public static $_baseUrl = "http://d.bbc.co.uk/";
     public static $_version = "ibl/v1/";
     public static $_client;
 
@@ -37,7 +37,7 @@ class IblClient_Models_Client
     protected function _get($feed, $params) {
         $params = array_merge($this->defaultParams, $params);
         $client = self::getClient();
-        $request = $client->get(self::$_version . $feed, array(), array('query' => $params));
+        $request = $client->get(self::$_version . $feed . ".json", array(), array('query' => $params));
     //var_dump($request->getUrl());die;
         $response = $request->send();
         $response->getBody();

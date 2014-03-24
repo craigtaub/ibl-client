@@ -2,9 +2,9 @@
 
 class IblClient_Models_Highlights_Channel extends IblClient_Models_Base implements IblClient_Models_Interface 
 {
-  public $elements = array();
-
   public $feed = "/channels/{id}/highlights";
+
+  public $elements = array();
 
   public $channel;
 
