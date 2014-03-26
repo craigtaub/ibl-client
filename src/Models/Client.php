@@ -20,11 +20,22 @@ class IblClient_Models_Client
     protected function _get($feed, $params) {
         $params = array_merge($this->defaultParams, $params);
         $client = self::getClient();
-        $request = $client->get(self::$_version . $feed . ".json", array(), array('query' => $params));
+        try {
+          $request = $client->get(self::$_version . $feed . ".json", 
+              array(), 
+              array(
+                'query' => $params,
+               // 'proxy' =>  '',
+              )
+          );
+        } catch (RequestException $e) {
+
+        }
     //var_dump($request->getUrl());die;
         $response = $request->send();
         $response->getBody();
         $array = $response->json();
+
         $json = json_encode($array);
         $object = json_decode($json);
         return $object;
